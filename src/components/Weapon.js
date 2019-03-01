@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 
 class Weapon extends Component {
-  handleEdit = () => {
+  handleEdit = e => {
     console.log("edit");
+    console.log(e.target.dataset.id)
+    this.props.showEditForm(e.target.dataset.id)
   }
 
   handleDelete = () => {
@@ -19,7 +21,7 @@ class Weapon extends Component {
         <p><strong>Damage:</strong> {weapon.damage}</p>
         <p><strong>RPM:</strong> {weapon.rpm}</p>
         <p><strong>Mag</strong> {weapon.mag}</p>
-        <button onClick={this.handleEdit}>Edit</button>
+        <button onClick={this.handleEdit} data-id={weapon.id}>Edit</button>
         <button onClick={this.handleDelete}>Delete</button>
       </div>
     );
