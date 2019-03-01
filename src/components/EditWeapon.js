@@ -62,6 +62,10 @@ class EditWeapon extends Component {
             <input type="number" onChange={this.handleChange} name="mag" value={this.state.mag}/>
           </div>
           <div className="form-group">
+            <label>Level</label>
+            <input type="number" onChange={this.handleChange} name="level" value={this.state.level}/>
+          </div>
+          <div className="form-group">
             <label>Favorite</label>
             <input type="checkbox" onChange={this.handleChange} name="favorite" checked={this.state.favorite}/>
           </div>
