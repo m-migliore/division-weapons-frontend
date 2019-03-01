@@ -26,7 +26,7 @@ class AddWeapon extends Component {
   render() {
     return (
       <div className="add-weapon">
-        <button onClick={this.props.hideAddForm}>X</button>
+        <button onClick={this.props.toggleAddForm}>X</button>
         <h1>Add Weapon</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">

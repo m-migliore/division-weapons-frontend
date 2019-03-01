@@ -68,17 +68,9 @@ class App extends Component {
     })
   }
 
-
-
-  showAddForm = () => {
+  toggleAddForm = () => {
     this.setState({
-      addWeapon: true
-    })
-  }
-
-  hideAddForm = () => {
-    this.setState({
-      addWeapon: false
+      addWeapon: !this.state.addWeapon
     })
   }
 
@@ -101,7 +93,8 @@ class App extends Component {
 
     return (
       <div className="App">
-        {this.state.addWeapon ? <AddWeapon  addWeapon={this.addWeapon} hideAddForm={this.hideAddForm}/> : <button onClick={this.showAddForm}>Add Weapon</button>}
+        {/* {this.state.addWeapon ? <AddWeapon addWeapon={this.addWeapon} hideAddForm={this.hideAddForm}/> : <button onClick={this.showAddForm}>Add Weapon</button>} */}
+        {this.state.addWeapon ? <AddWeapon addWeapon={this.addWeapon} toggleAddForm={this.toggleAddForm}/> : <button onClick={this.toggleAddForm}>Add Weapon</button>}
         {this.state.editWeapon ?
           <EditWeapon
             editWeapon={this.editWeapon}
