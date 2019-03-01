@@ -7,8 +7,9 @@ class Weapon extends Component {
     this.props.showEditForm(e.target.dataset.id)
   }
 
-  handleDelete = () => {
+  handleDelete = e => {
     console.log("delete")
+    this.props.deleteWeapon(e.target.dataset.id)
   }
 
   render() {
@@ -22,7 +23,7 @@ class Weapon extends Component {
         <p><strong>RPM:</strong> {weapon.rpm}</p>
         <p><strong>Mag</strong> {weapon.mag}</p>
         <button onClick={this.handleEdit} data-id={weapon.id}>Edit</button>
-        <button onClick={this.handleDelete}>Delete</button>
+        <button onClick={this.handleDelete} data-id={weapon.id}>Delete</button>
       </div>
     );
   }

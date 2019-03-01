@@ -13,17 +13,11 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.refreshWeapons()
-  }
-
-  refreshWeapons = () => {
     fetch("http://localhost:4000/api/v1/weapons")
     .then(res => res.json())
     .then(data => {
       this.setState({
-        weapons: data,
-        addWeapon: false,
-        editWeapon: false
+        weapons: data
       })
     })
   }
@@ -68,6 +62,21 @@ class App extends Component {
     })
   }
 
+  deleteWeapon = weaponId => {
+    fetch(`http://localhost:4000/api/v1/weapons/${weaponId}`, {
+      method: "DELETE",
+    })
+    .then(this.postDeleteWeapon(weaponId))
+  }
+
+  postDeleteWeapon = weaponId => {
+    const weapons = [...this.state.weapons]
+    const updatedWeapons = weapons.filter(weapon => weapon.id != weaponId)
+    this.setState({
+      weapons: updatedWeapons
+    })
+  }
+
   toggleAddForm = () => {
     this.setState({
       addWeapon: !this.state.addWeapon
@@ -93,8 +102,11 @@ class App extends Component {
 
     return (
       <div className="App">
-        {/* {this.state.addWeapon ? <AddWeapon addWeapon={this.addWeapon} hideAddForm={this.hideAddForm}/> : <button onClick={this.showAddForm}>Add Weapon</button>} */}
-        {this.state.addWeapon ? <AddWeapon addWeapon={this.addWeapon} toggleAddForm={this.toggleAddForm}/> : <button onClick={this.toggleAddForm}>Add Weapon</button>}
+        {this.state.addWeapon ?
+          <AddWeapon addWeapon={this.addWeapon} toggleAddForm={this.toggleAddForm}/>
+          :
+          <button onClick={this.toggleAddForm}>Add Weapon</button>
+        }
         {this.state.editWeapon ?
           <EditWeapon
             editWeapon={this.editWeapon}
@@ -112,6 +124,7 @@ class App extends Component {
                     weapon={weapon}
                     showEditForm={this.showEditForm}
                     editWeapon={this.editWeapon}
+                    deleteWeapon={this.deleteWeapon}
                    />
           })
           :
@@ -125,6 +138,7 @@ class App extends Component {
                     weapon={weapon}
                     showEditForm={this.showEditForm}
                     editWeapon={this.editWeapon}
+                    deleteWeapon={this.deleteWeapon}
                    />
           })
           :
